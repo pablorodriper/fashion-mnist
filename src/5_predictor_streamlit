@@ -39,3 +39,10 @@ if process_button:
 
     true_label = LABELS[np.argmax(test_y[sample_id])]
     pred_label = LABELS[np.argmax(y_pred)]
+
+    if true_label == pred_label:
+        st.success(f"True label: {true_label:>10}\n\n" \
+                f"Predicted label: {pred_label:>5}")
+    else:
+        st.error(f"True label: {true_label:>10}\n\n" \
+                f"Predicted label: {pred_label:>5}")
