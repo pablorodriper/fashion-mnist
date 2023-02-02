@@ -1,6 +1,7 @@
 import pickle
 
 import numpy as np
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D
 from tensorflow.keras.models import Sequential
@@ -59,6 +60,10 @@ if __name__ == '__main__':
     model = get_model()
     model.fit(train_x, train_y, epochs=2, batch_size=16, validation_data=(val_x, val_y), verbose=1)
 
+    # Evaluate model
+    y_pred = model.predict(test_x)
+    print(classification_report(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
+    print(confusion_matrix(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
 
 
 
