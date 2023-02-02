@@ -1,7 +1,6 @@
 import numpy as np
-from tensorflow.keras.models import load_model
 
-from utils import load_data
+from utils import load_data, load_keras_model
 
 LABELS = {0: "Upper part", 1: "Bottom part", 2: "One piece", 3: "Footwear", 4: "Bags"}
 
@@ -11,7 +10,7 @@ if __name__ == '__main__':
     train_x, train_y, test_x, test_y = load_data()
 
     # Load keras model
-    model = load_model('../models/keras_model.h5')
+    model = load_keras_model()
 
     while True:
 
