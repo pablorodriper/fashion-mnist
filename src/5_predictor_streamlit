@@ -1,0 +1,29 @@
+import streamlit as st
+
+from utils import load_keras_model, load_data
+
+st.set_page_config(
+    page_title="Fashion MNIST Classifier",
+    page_icon="👕",
+    #layout="wide",
+    #initial_sidebar_state="expanded",
+    # menu_items={
+    #     'Get help': 'https://www.extremelycoolapp.com/help',
+    #     'Report a bug': "https://www.extremelycoolapp.com/bug",
+    #     'About': "# This is a header. This is an *extremely* cool app!"
+    # }
+)
+
+
+st.title("Fashion MNIST Classifier")
+st.write("This is a web app that uses a neural network to classify images from the Fashion MNIST dataset.")
+st.write("Select the index of an image from the test set and click the button to see the prediction.")
+
+# Load data
+_, _, test_x, test_y = load_data()
+
+# Load keras model
+model = load_keras_model()
+
+sample_id = st.number_input('Select an index of the test set to process:', 
+                           min_value=0, max_value=10000, value=0, step=1, format="%d")
