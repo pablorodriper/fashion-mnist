@@ -1,6 +1,44 @@
 # Fashion-MNIST Classifier
 
 
+# Structure
+
+```bash
+.
+├── data
+│   ├── original
+│   │   ├── t10k-images-idx3-ubyte.gz
+│   │   ├── t10k-labels-idx1-ubyte.gz
+│   │   ├── train-images-idx3-ubyte.gz
+│   │   └── train-labels-idx1-ubyte.gz
+│   └── processed
+│       └── fashion_mnist_k5.pkl
+├── Dockerfile
+├── models
+│   └── keras_model.h5
+├── notebooks
+├── Readme.md
+├── requirements.txt
+└── src
+    ├── 1_download_dataset.py
+    ├── 2_transform_dataset.py
+    ├── 3_train_network.py
+    ├── 4_predictor.py
+    ├── 5_predictor_streamlit.py
+    └── utils.py
+```
+
+
+# Streamlit App
+
+<img src="streamlit_screenshot.png">
+
+## Run
+
+```bash
+cd src
+streamlit run 5_predictor_streamlit.py
+```
 
 # Results
 

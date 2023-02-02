@@ -8,15 +8,7 @@ LABELS = {0: "Upper part", 1: "Bottom part", 2: "One piece", 3: "Footwear", 4: "
 st.set_page_config(
     page_title="Fashion MNIST Classifier",
     page_icon="👕",
-    #layout="wide",
-    #initial_sidebar_state="expanded",
-    # menu_items={
-    #     'Get help': 'https://www.extremelycoolapp.com/help',
-    #     'Report a bug': "https://www.extremelycoolapp.com/bug",
-    #     'About': "# This is a header. This is an *extremely* cool app!"
-    # }
 )
-
 
 st.title("Fashion MNIST Classifier")
 st.write("This is a web app that uses a neural network to classify images from the Fashion MNIST dataset.")
