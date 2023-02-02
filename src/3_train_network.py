@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     # Train model
     model = get_model()
-    model.fit(train_x, train_y, epochs=2, batch_size=16, validation_data=(val_x, val_y), verbose=1)
+    model.fit(train_x, train_y, epochs=6, batch_size=16, validation_data=(val_x, val_y), verbose=1)
 
     # Evaluate model
     y_pred = model.predict(test_x)

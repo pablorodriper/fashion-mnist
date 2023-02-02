@@ -1,7 +1,6 @@
 import numpy as np
-from tensorflow.keras.models import load_model
 
-from utils import load_data
+from utils import load_data, load_keras_model, pred_sample
 
 LABELS = {0: "Upper part", 1: "Bottom part", 2: "One piece", 3: "Footwear", 4: "Bags"}
 
@@ -11,7 +10,7 @@ if __name__ == '__main__':
     train_x, train_y, test_x, test_y = load_data()
 
     # Load keras model
-    model = load_model('../models/keras_model.h5')
+    model = load_keras_model()
 
     while True:
 
@@ -30,11 +29,8 @@ if __name__ == '__main__':
             print("Invalid id. The id must be between 0 and 10000\n\n")
             continue
 
-        # Add batch dimension
-        sample = np.expand_dims(test_x[sample_id], axis=0)
-
         # Predict
-        y_pred = model.predict(sample, verbose=0)
+        y_pred = pred_sample(model, test_x[sample_id])
 
         true_label = LABELS[np.argmax(test_y[sample_id])]
         pred_label = LABELS[np.argmax(y_pred)]
