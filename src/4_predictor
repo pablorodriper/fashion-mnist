@@ -39,5 +39,7 @@ if __name__ == '__main__':
         true_label = LABELS[np.argmax(test_y[sample_id])]
         pred_label = LABELS[np.argmax(y_pred)]
 
-        print(f"True label: {true_label:>10}")
-        print(f"Predicted label: {pred_label}\n\n")
+        print("--------------------------------")
+        print(f"True label: {true_label:>18}")
+        print(f"Predicted label: {pred_label:>13}")
+        print("--------------------------------\n\n")
