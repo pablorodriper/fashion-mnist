@@ -1,5 +1,3 @@
-import pickle
-
 import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
@@ -7,13 +5,8 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import SGD
 
-def load_data():
-    """
-    Load data from pickle file
-    """
-    with open('../data/processed/fashion_mnist_k5.pkl', 'rb') as f:
-        (train_x, train_y), (test_x, test_y) = pickle.load(f)
-        return train_x, train_y, test_x, test_y
+from utils import load_data
+
 
 def cast_and_normalize_images(train, test):
     """
@@ -67,4 +60,4 @@ if __name__ == '__main__':
 
     # Save keras model to disk
     model.save('../models/keras_model.h5')
-    print("Model saved to disk")
+    print("\nModel saved to disk!")
