@@ -67,3 +67,4 @@ if __name__ == '__main__':
 
     # Save keras model to disk
     model.save('../models/keras_model.h5')
+    print("Model saved to disk")
