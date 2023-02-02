@@ -3,6 +3,8 @@ from tensorflow.keras.models import load_model
 
 from utils import load_data
 
+LABELS = {0: "Upper part", 1: "Bottom part", 2: "One piece", 3: "Footwear", 4: "Bags"}
+
 
 if __name__ == '__main__':
     # Load data
@@ -27,6 +29,8 @@ if __name__ == '__main__':
         # Predict
         y_pred = model.predict(sample, verbose=0)
 
-        # TODO: Change number to label
-        print(f"True label: {np.argmax(test_y[sample_id]):>10}")
-        print(f"Predicted label: {np.argmax(y_pred):>5}\n\n")
+        true_label = LABELS[np.argmax(test_y[sample_id])]
+        pred_label = LABELS[np.argmax(y_pred)]
+
+        print(f"True label: {true_label:>10}")
+        print(f"Predicted label: {pred_label}\n\n")
