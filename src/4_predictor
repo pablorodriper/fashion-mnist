@@ -1,0 +1,32 @@
+import numpy as np
+from tensorflow.keras.models import load_model
+
+from utils import load_data
+
+
+if __name__ == '__main__':
+    # Load data
+    train_x, train_y, test_x, test_y = load_data()
+
+    # Load keras model
+    model = load_model('../models/keras_model.h5')
+
+    while True:
+
+        # Enter id of sample to predict with keyboard
+        try:
+            sample_id = int(input("Enter sample id to predict: "))
+        except ValueError:
+            print("Invalid id. The id must be a whole number\n\n")
+            continue
+
+
+        # Add batch dimension
+        sample = np.expand_dims(test_x[sample_id], axis=0)
+
+        # Predict
+        y_pred = model.predict(sample, verbose=0)
+
+        # TODO: Change number to label
+        print(f"True label: {np.argmax(test_y[sample_id]):>10}")
+        print(f"Predicted label: {np.argmax(y_pred):>5}\n\n")
