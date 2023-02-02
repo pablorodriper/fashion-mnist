@@ -44,9 +44,9 @@ def get_model():
 
 
 if __name__ == '__main__':
+    # Prepare data
     train_x, train_y, test_x, test_y = load_data()
     train_x, test_x = cast_and_normalize_images(train_x, test_x)
-
     train_x, val_x, train_y, val_y = train_test_split(
         train_x, 
         train_y,
@@ -55,7 +55,9 @@ if __name__ == '__main__':
         random_state=42,
     )
 
+    # Train model
     model = get_model()
+    model.fit(train_x, train_y, epochs=2, batch_size=16, validation_data=(val_x, val_y), verbose=1)
 
 
 
