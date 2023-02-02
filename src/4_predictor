@@ -22,6 +22,13 @@ if __name__ == '__main__':
             print("Invalid id. The id must be a whole number\n\n")
             continue
 
+        if not isinstance(sample_id, int):
+            print("Invalid id. The id must be a whole number\n\n")
+            continue
+        
+        if sample_id > 10000 or sample_id < 0:
+            print("Invalid id. The id must be between 0 and 10000\n\n")
+            continue
 
         # Add batch dimension
         sample = np.expand_dims(test_x[sample_id], axis=0)
