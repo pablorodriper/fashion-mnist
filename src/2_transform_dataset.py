@@ -1,6 +1,10 @@
 import gzip
 import os
+import pickle
+
 import numpy as np
+from tensorflow.keras.utils import to_categorical
+
 
 def load_mnist(path, kind='train'):
     """Load MNIST data from `path`"""
@@ -54,3 +58,6 @@ y_test = change_labels(y_test)
 # Reshape labels
 trainY = to_categorical(y_train)
 testY = to_categorical(y_test)
+
+with open("../data/processed/fashion_mnist_k5.pkl", "wb") as f:
+    pickle.dump(((trainX, trainY), (testX, testY)), f)
