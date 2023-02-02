@@ -65,9 +65,5 @@ if __name__ == '__main__':
     print(classification_report(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
     print(confusion_matrix(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
 
-
-
-
-
-
-
+    # Save keras model to disk
+    model.save('../models/keras_model.h5')
