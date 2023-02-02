@@ -31,6 +31,8 @@ model = load_keras_model()
 sample_id = st.number_input('Select an index of the test set to process:', 
                            min_value=0, max_value=10000, value=0, step=1, format="%d")
 
+st.image(test_x[sample_id], caption=f"Sample {sample_id} from the test set", )
+
 process_button = st.button("Predict image class")
 
 if process_button:
