@@ -24,4 +24,4 @@ download_with_curl(train_labels_url, train_labels_path)
 download_with_curl(test_images_url, test_images_path)
 download_with_curl(test_labels_url, test_labels_path)
 
-print("Download complete.")
+print("Download complete!")

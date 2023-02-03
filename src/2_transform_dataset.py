@@ -8,8 +8,10 @@ from tensorflow.keras.utils import to_categorical
 
 def load_mnist(path, kind='train'):
     """
-    Code from the Fashion-MNIST repository.
     Load MNIST data from `path`
+
+    Code from the Fashion-MNIST repository.
+    https://github.com/zalandoresearch/fashion-mnist/blob/master/utils/mnist_reader.py
 
     Parameters
     ----------
@@ -18,12 +20,8 @@ def load_mnist(path, kind='train'):
     kind : str
         Either 'train' or 't10k' to load the training or test dataset
     """
-    labels_path = os.path.join(path,
-                               '%s-labels-idx1-ubyte.gz'
-                               % kind)
-    images_path = os.path.join(path,
-                               '%s-images-idx3-ubyte.gz'
-                               % kind)
+    labels_path = os.path.join(path, '%s-labels-idx1-ubyte.gz' % kind)
+    images_path = os.path.join(path, '%s-images-idx3-ubyte.gz' % kind)
 
     with gzip.open(labels_path, 'rb') as lbpath:
         labels = np.frombuffer(lbpath.read(), dtype=np.uint8,
@@ -56,8 +54,8 @@ def change_labels(labels):
         Changed labels. Each label is an integer between 0 and 4.
     """
 
-    labels = np.where(labels == 0, 0, labels)
-    labels = np.where(labels == 1, 1, labels)
+    # labels = np.where(labels == 0, 0, labels)     # Added for readability
+    # labels = np.where(labels == 1, 1, labels)     # Added for readability
     labels = np.where(labels == 2, 0, labels)
     labels = np.where(labels == 3, 2, labels)
     labels = np.where(labels == 4, 0, labels)
