@@ -7,7 +7,17 @@ from tensorflow.keras.utils import to_categorical
 
 
 def load_mnist(path, kind='train'):
-    """Load MNIST data from `path`"""
+    """
+    Code from the Fashion-MNIST repository.
+    Load MNIST data from `path`
+
+    Parameters
+    ----------
+    path : str
+        Path to the MNIST data directory
+    kind : str
+        Either 'train' or 't10k' to load the training or test dataset
+    """
     labels_path = os.path.join(path,
                                '%s-labels-idx1-ubyte.gz'
                                % kind)
@@ -27,7 +37,24 @@ def load_mnist(path, kind='train'):
 
 
 def change_labels(labels):
-    """Change dataset from 10 classes to 5 classes"""
+    """
+    Change dataset from 10 classes to 5 classes with the following mapping:
+        Upper part: T-shirt/top + Pullover + Dress + Shirt
+        Bottom part: Trouser
+        One piece: Dress
+        Footwear: Sandal + Sneaker + Ankle boot
+        Bags: Bag
+
+    Parameters
+    ----------
+    labels : numpy.ndarray
+        Labels to be changed. Each label is an integer between 0 and 9.
+    
+    Returns
+    -------
+    labels : numpy.ndarray
+        Changed labels. Each label is an integer between 0 and 4.
+    """
 
     labels = np.where(labels == 0, 0, labels)
     labels = np.where(labels == 1, 1, labels)
@@ -42,22 +69,22 @@ def change_labels(labels):
 
     return labels
     
+if __name__ == "__main__":
+    # Load data
+    X_train, y_train = load_mnist('../data/original', kind='train')
+    X_test, y_test = load_mnist('../data/original', kind='t10k')
 
-# Load data
-X_train, y_train = load_mnist('../data/original', kind='train')
-X_test, y_test = load_mnist('../data/original', kind='t10k')
+    # Reshape data
+    trainX = X_train.reshape((X_train.shape[0], 28, 28, 1))
+    testX = X_test.reshape((X_test.shape[0], 28, 28, 1))
 
-# Reshape data
-trainX = X_train.reshape((X_train.shape[0], 28, 28, 1))
-testX = X_test.reshape((X_test.shape[0], 28, 28, 1))
+    # Change labels
+    y_train = change_labels(y_train)
+    y_test = change_labels(y_test)
 
-# Change labels
-y_train = change_labels(y_train)
-y_test = change_labels(y_test)
+    # Reshape labels
+    trainY = to_categorical(y_train)
+    testY = to_categorical(y_test)
 
-# Reshape labels
-trainY = to_categorical(y_train)
-testY = to_categorical(y_test)
-
-with open("../data/processed/fashion_mnist_k5.pkl", "wb") as f:
-    pickle.dump(((trainX, trainY), (testX, testY)), f)
+    with open("../data/processed/fashion_mnist_k5.pkl", "wb") as f:
+        pickle.dump(((trainX, trainY), (testX, testY)), f)

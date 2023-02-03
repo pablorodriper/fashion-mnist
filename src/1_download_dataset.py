@@ -1,6 +1,9 @@
 import subprocess
 
 def download_with_curl(url, path):
+    """
+    Download a file from a URL to a path using curl.
+    """
     curl_cmd = ['curl', url, '-o', path]
     subprocess.call(curl_cmd)
 
