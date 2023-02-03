@@ -22,6 +22,9 @@ def cast_and_normalize_images(train, test):
 
 
 def get_model():
+    """
+    Define the CNN model
+    """
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', kernel_initializer='he_uniform', input_shape=(28, 28, 1)))
     model.add(MaxPooling2D((2, 2)))
