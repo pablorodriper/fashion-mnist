@@ -1,10 +1,11 @@
+import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
+from tensorflow.keras.callbacks import ReduceLROnPlateau
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.callbacks import ReduceLROnPlateau
 
 from utils import load_data
 
@@ -13,26 +14,6 @@ def cast_and_normalize_images(train, test):
     """
     Convert from integers to floats and normalize to range 0-1
     """
-    # # Apply sobel filter
-    # from scipy import ndimage
-    # for i in range(train.shape[0]):
-    #     img = train[i, :, :]
-    #     # Change all pixels to 0, 50, 100, 150, 200, 250, 255
-    #     img = np.round(img / 50) * 50
-    #     # Laplace filter
-    #     img = ndimage.laplace(img)
-    #     # Normalize between 0 and 255
-    #     train[i, :, :] = (img - img.min()) / (img.max() - img.min()) * 255
-        
-
-    # for i in range(test.shape[0]):
-    #     img = test[i, :, :]
-    #     # Change all pixels to 0, 50, 100, 150, 200, 250, 255
-    #     img = np.round(img / 50) * 50
-    #     # Laplace filter
-    #     img = ndimage.laplace(img)
-    #     # Normalize between 0 and 255
-    #     test[i, :, :] = (img - img.min()) / (img.max() - img.min()) * 255
 
     train_norm = train.astype('float32')
     test_norm = test.astype('float32')
@@ -60,6 +41,28 @@ def get_model():
     model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
 
     return model
+
+
+def plot_confusion_matrix(test_y, y_pred):
+    """
+    Plot confusion matrix
+
+    Parameters
+    -----------
+    test_y:
+        True labels in categorical format
+    y_pred:
+        Predicted labels in categorical format
+    """
+    ConfusionMatrixDisplay.from_predictions(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1), 
+                                            normalize="true", 
+                                            include_values=True,
+                                            cmap='Blues')
+    plt.title("Confusion Matrix")
+    plt.xlabel("Pred")
+    plt.ylabel("True")
+
+    plt.savefig('../confusion_matrix.png', dpi=300, bbox_inches='tight')
 
 
 if __name__ == '__main__':
@@ -90,6 +93,7 @@ if __name__ == '__main__':
     y_pred = model.predict(test_x)
     print(classification_report(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
     print(confusion_matrix(np.argmax(test_y, axis=1), np.argmax(y_pred, axis=1)))
+    plot_confusion_matrix(test_y, y_pred)
 
     # Save keras model to disk
     model.save('../models/keras_model.h5')
