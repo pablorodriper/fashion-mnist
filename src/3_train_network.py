@@ -62,7 +62,7 @@ def plot_confusion_matrix(test_y, y_pred):
     plt.xlabel("Pred")
     plt.ylabel("True")
 
-    plt.savefig('../confusion_matrix.png', dpi=300, bbox_inches='tight')
+    plt.savefig('../plots/confusion_matrix.png', dpi=300, bbox_inches='tight')
 
 
 if __name__ == '__main__':
