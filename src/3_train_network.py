@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import ConfusionMatrixDisplay, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.callbacks import ReduceLROnPlateau
+from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import SGD
@@ -80,13 +80,14 @@ if __name__ == '__main__':
     # Train model
     model = get_model()
 
-    # reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, min_lr=0.001)
+    reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, min_lr=0.001)
+    early_stop = EarlyStopping(monitor='val_loss', patience=5)
 
     model.fit(train_x, train_y, 
-              epochs=6, batch_size=16, 
+              epochs=16, batch_size=16, 
               validation_data=(val_x, val_y), 
             #   class_weight={0: 0.25, 1: 1, 2: 1, 3: 0.333, 4: 1},
-            #   callbacks=[reduce_lr], 
+              callbacks=[reduce_lr, early_stop], 
               verbose=1)
 
     # Evaluate model
