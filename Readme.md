@@ -55,13 +55,24 @@ cd src
 python 3_train_network.py
 ```
 
-# Streamlit App
+# Usage
+
+## Terminal App
+
+You can predict the label of an image from the test set with the following command:
+
+```bash
+cd src
+python 4_terminal_prediction.py -n <image_index>
+```
+
+## Streamlit App
 
 I've built a simple streamlit app to test the model. You can run it with the following command:
 
 ```bash
 cd src
-streamlit run streamlit_prediction.py
+streamlit run 5_streamlit_prediction.py
 ```
 
 ## Screenshot
@@ -76,22 +87,21 @@ The model was trained for 8 epochs (early stopping) with a batch size of 16. The
 ```bash
               precision    recall  f1-score   support
 
-           0       0.98      0.98      0.98      4000
-           1       0.99      0.98      0.99      1000
-           2       0.92      0.92      0.92      1000
+           0       0.98      0.97      0.98      4000
+           1       1.00      0.98      0.99      1000
+           2       0.90      0.94      0.92      1000
            3       1.00      1.00      1.00      3000
-           4       0.99      0.98      0.98      1000
+           4       0.98      0.98      0.98      1000
 
     accuracy                           0.98     10000
    macro avg       0.97      0.97      0.97     10000
 weighted avg       0.98      0.98      0.98     10000
 
-
-[[3919    1   70    1    9]
- [  11  980    9    0    0]
- [  73    6  917    0    4]
- [   1    0    0 2998    1]
- [  14    0    5    5  976]]
+[[3890    2   92    1   15]
+ [   9  979   10    0    2]
+ [  55    2  938    1    4]
+ [   1    0    0 2999    0]
+ [  11    0    3    6  980]]
  ```
 
 As we can see, the model performs very well with an accuracy of 98%. All the classes have a F1 score of 0.98 or higher, except for the "One Piece" class, which has a F1 score of 0.92. With the confusion matrix we can see that the model is having some trouble between the "One Piece" and "Upper Part" classes and between the "Upper Part" and "One Piece" classes.
