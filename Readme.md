@@ -55,13 +55,24 @@ cd src
 python 3_train_network.py
 ```
 
-# Streamlit App
+# Usage
+
+## Terminal App
+
+You can predict the label of an image from the test set with the following command:
+
+```bash
+cd src
+python 4_terminal_prediction.py -n <image_index>
+```
+
+## Streamlit App
 
 I've built a simple streamlit app to test the model. You can run it with the following command:
 
 ```bash
 cd src
-streamlit run streamlit_prediction.py
+streamlit run 5_streamlit_prediction.py
 ```
 
 ## Screenshot
