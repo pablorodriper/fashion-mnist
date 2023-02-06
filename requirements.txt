@@ -5,3 +5,4 @@ tensorflow
 streamlit
 largestinteriorrectangle
 opencv-python
+tqdm
