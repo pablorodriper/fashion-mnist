@@ -23,8 +23,8 @@ The project is structured as follows:
     ├── 1_download_dataset.py
     ├── 2_transform_dataset.py
     ├── 3_train_network.py
-    ├── 4_predictor.py
-    ├── 5_predictor_streamlit.py
+    ├── 4_terminal_prediction.py
+    ├── 5_streamlit_prediction.py
     └── utils.py
 ```
 
@@ -36,13 +36,32 @@ The Dockerfile is based on the official tensorflow docker image with `python 3.8
 
 If you prefer to build your own environment, you can use the requirements.txt file.
 
+## Download Dataset
+
+The first time you run the code, you will need to download the dataset and create the 5-label dataset. You can do it with the following steps:
+
+```bash
+cd src
+python 1_download_dataset.py
+python 2_transform_dataset.py
+```
+
+## Train Model
+
+You have to train the model and save it to the models folder before using the prediction scripts. You can do it with the following steps:
+
+```bash
+cd src
+python 3_train_network.py
+```
+
 # Streamlit App
 
 I've built a simple streamlit app to test the model. You can run it with the following command:
 
 ```bash
 cd src
-streamlit run 5_predictor_streamlit.py
+streamlit run streamlit_prediction.py
 ```
 
 ## Screenshot
@@ -82,14 +101,16 @@ As we can see, the model performs very well with an accuracy of 98%. All the cla
 
 I have achieved a 98% accuracy on the test set of this reduced version of Fashion MNIST.
 
-I have tried three different cnn models with different number of layers: One small layer, one bigger layer and three layers.
+I have tried three different CNN models with different number of layers: One small layer, one big layer and three layers.
 
-The best results were achieved with the one bigger layer, with 98% accuracy.
+The best results were achieved with the one big layer, with 98% accuracy.
 
 I also tried two experiments: Using the laplacian of the image and using the largest interior rectangle of the image.
 
-- The laplacian of the image is the second derivative of it and it helps highlighting the edges of the image. 
+- The laplacian of the image is the second derivative of it and it helps highlighting the edges of the image. I used this data to train the same CNN model as before.
 
-- The largest interior rectangle is the largest rectangle that can be drawn inside the object.
+- The largest interior rectangle is the largest rectangle that can be drawn inside the object. I used the coordinates of the rectangle to train a Decision Tree and a Random Forest Classifier (Not the image itself) 
 
 The results for the laplacian were slightly worse than the original images and for the largest interior rectangle were just a 89% accuracy. On the other hand, the prediction time was 100x faster for an individual sample and almost 1000x faster for the whole test set.
+
+Other non-DL approaches that could be tried are calculating the average image of each class and measuring the difference between the input image and the five classes or using the histogram of the image as features.
