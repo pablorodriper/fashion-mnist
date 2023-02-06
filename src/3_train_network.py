@@ -86,7 +86,7 @@ if __name__ == '__main__':
     model.fit(train_x, train_y, 
               epochs=16, batch_size=16, 
               validation_data=(val_x, val_y), 
-            #   class_weight={0: 0.25, 1: 1, 2: 1, 3: 0.333, 4: 1},
+              class_weight={0: 0.5, 1: 2, 2: 2, 3: 0.667, 4: 2},
               callbacks=[reduce_lr, early_stop], 
               verbose=1)
 
