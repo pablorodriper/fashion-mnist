@@ -2,3 +2,7 @@ jupyterlab
 numpy
 scikit-learn
 tensorflow
+streamlit
+largestinteriorrectangle
+opencv-python
+tqdm

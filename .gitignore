@@ -1,2 +1,5 @@
 *.pdf
 *.gz
+*.pkl
+*.h5
+*.pyc
