@@ -6,3 +6,5 @@ streamlit
 largestinteriorrectangle
 opencv-python
 tqdm
+pandas
+matplotlib
